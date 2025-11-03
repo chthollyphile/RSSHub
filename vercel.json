@@ -1,18 +1,26 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "dist/index.js",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": "assets/build/**"
-            }
-        }
-    ],
-    "routes": [
-        {
-            "src": "/.*",
-            "dest": "dist/index.js"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json", 
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist",
+        "buildCommand": "pnpm run build:vercel" 
+      }
+    },
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": "assets/build/**" 
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "dist/index.js"
+    }
+  ]
 }
